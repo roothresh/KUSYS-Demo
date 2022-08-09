@@ -1,0 +1,57 @@
+﻿@model Dictionary<Course,List<Student>>
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Enrollments";
+}
+
+@if(TempData["failed"] != null)
+{
+    <h2 class="red">@TempData["failed"]</h2>
+}
+
+<h1>Enrollments</h1>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Enrollment List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a type="button" asp-controller="Enrollment" asp-action="AddEnrollment" class="btn btn-primary">Add Enrollment</a>
+            
+        </div>
+    </div>
+</div>
+<ul class="list-group">
+@{
+    
+        @foreach (var data in Model)
+        {
+        <li class="list-group-item">@data.Key.CourseId - @data.Key.CourseName</li>
+            <ul class="list-group " style="margin-left:10px">
+                @{
+                    @if (data.Value.Count() <= 0)
+                    {
+                        <li class="list-group-item">No Existing Student In This Course...</li>
+                    }else{
+                        @for(int x = 0; x < data.Value.Count(); x++)
+                        {
+                            <li class="list-group-item">@data.Value[x].StudentNumber - @data.Value[x].StudentName @data.Value[x].StudentSurname</li>
+                        }
+                    }
+                }
+                
+                
+            </ul>
+        }
+    
+        
+    }
+ </ul>   
+  
+
+
+
+
+

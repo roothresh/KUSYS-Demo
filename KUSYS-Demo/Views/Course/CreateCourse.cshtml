@@ -1,0 +1,38 @@
+﻿@model Course
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Course</h2>
+            <hr />
+        </div>
+        <!--
+            asp-validation-summary tüm alanların valdiasyonunu yaparak toplu bir şekilde uyarı mesajlarını gösterir.
+            her form control için de asp-validation-for kullanarak o alan için model kullanılarak validation sağlanır. Harika bir şey.
+        -->
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="CourseId"></label>
+            <input asp-for="CourseId" class="form-control" />
+            <span asp-validation-for="CourseId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CourseName"></label>
+            <input asp-for="CourseName" class="form-control" />
+            <span asp-validation-for="CourseName" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="Course" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+    </div>
+</form>
+
+
+<!--
+    Partial view gömmek için 
+    <partial name="_PartialViewName" /> 
+    yazmamız yeterli. Scriptleri vb bu viewe gömebiliriz buda güzelmiş.
+    Partial Viewler genelde '_' ile başlar. Kural değildir ama kuraldır :D
+
+-->

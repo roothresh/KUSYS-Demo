@@ -1,0 +1,65 @@
+﻿@model List<Course>
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<h1>Courses</h1>
+
+<div id="ModalPlaceHolder"></div>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Course List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a type="button" asp-controller="Course" asp-action="CreateCourse" class="btn btn-primary">Create Course</a>
+            
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Course ID
+            </th>
+            <th>
+                Course Name
+            </th>
+            <th>
+                <div class="w-75 btn-group" role="group">
+                    <a> <i class="bi bi-pencil-square"></i> Edit</a>
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var course in Model)
+        {
+            <tr>
+                <td width="50%">
+                    @course.CourseId
+                </td>
+                <td width="50%">
+                    @course.CourseName
+                </td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a type=button class="btn btn-warning" asp-controller="Course" asp-action="EditCourse" asp-route-Id="@course.Id"><i class="bi bi-pencil-square"></i> Edit </a>
+                        <a type=button class="btn btn-danger" asp-controller="Course" asp-action="DeleteCourse" asp-route-Id="@course.Id"><i class="bi bi-pencil-square"></i> Delete </a>
+                    </div>
+                </td>
+            </tr>
+
+
+        }
+    </tbody>
+</table>
+
+
+
+
+

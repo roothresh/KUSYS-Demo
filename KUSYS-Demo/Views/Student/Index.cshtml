@@ -1,0 +1,78 @@
+﻿@model List<Student>
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Students";
+}
+
+<h1>Students</h1>
+
+<div id="ModalPlaceHolder"></div>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Student List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a type="button" asp-controller="Student" asp-action="CreateStudent" class="btn btn-primary">Create Student</a>
+            
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Student ID
+            </th>
+            <th>
+                Student Name
+            </th>
+            <th>
+                Student Surname
+            </th>
+            <th>
+                Student Birthdate
+            </th>
+            <th>
+                <div class="w-75 btn-group" role="group">
+                    <a> <i class="bi bi-pencil-square"></i> Edit</a>
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var student in Model)
+        {
+            <tr>
+                <td width="50%">
+                    @student.StudentNumber
+                </td>
+                <td width="50%">
+                    @student.StudentName
+                </td>
+                <td width="50%">
+                    @student.StudentSurname
+                </td>
+                <td width="50%">
+                    @student.BirthDate
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#showStudentDetail" data-url="@Url.Action("StudentDetail")" data-id="@student.Id">Detail</a>
+                        <a type=button class="btn btn-warning" asp-controller="Student" asp-action="EditStudent" asp-route-Id="@student.Id"><i class="bi bi-pencil-square"></i> Edit </a>
+                        <a type=button class="btn btn-danger" asp-controller="Student" asp-action="DeleteStudent" asp-route-Id="@student.Id"><i class="bi bi-pencil-square"></i> Delete </a>
+                    </div>
+                </td>
+            </tr>
+
+
+        }
+    </tbody>
+</table>
+
+
+
+
+
